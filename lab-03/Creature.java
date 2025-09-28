@@ -1,16 +1,16 @@
 public class Creature {
     String name;
     double size;
-    String color;  // Add color property
+    String color;  
 
-    // Constructor to initialize Creature
+    
     public Creature(String name, double size, String color) {
         this.name = name;
         this.size = size;
-        this.color = color;  // Initialize color
+        this.color = color;  
     }
 
-    // Action methods
+    
     public void sleep() {
         System.out.println(name + " is sleeping peacefully.");
     }
