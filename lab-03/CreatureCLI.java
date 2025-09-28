@@ -31,7 +31,7 @@ public class CreatureCLI {
                     String updatedName = updateData[0].split(":")[1];
                     double updatedWeight = Double.parseDouble(updateData[1].split(":")[1]);
                     Creature updatedCreature = new Creature(updatedName, updatedWeight);
-                    registry.getCreature(updateIndex).name = updatedName;  // Update values
+                    registry.getCreature(updateIndex).name = updatedName;  
                     break;
                 default:
                     System.out.println("Unknown command");
@@ -42,6 +42,6 @@ public class CreatureCLI {
             System.exit(1);
         }
 
-        registry.saveToFile("creature-data.csv"); // Save back to file
+        registry.saveToFile("creature-data.csv"); 
     }
 }
