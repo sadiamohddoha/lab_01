@@ -32,15 +32,15 @@ public class ProcessCreatureFile {
         
         if (!creatures.isEmpty()) {
             Creature firstCreature = creatures.get(0);
-            firstCreature.name = "NewName";  // Change the name
-            firstCreature.size = 1.5;        // Change the size
+            firstCreature.name = "NewName";  
+            firstCreature.size = 1.5;        
         }
 
         // Step 4
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/sdoha/Documents/creature-data.csv"))) {
             
             for (Creature c : creatures) {
-                bw.write(c.name + "," + c.size + "," + c.color);  // Combine name, size, and color with commas
+                bw.write(c.name + "," + c.size + "," + c.color);  
                 bw.newLine();  
             }
         } catch (IOException e) {
