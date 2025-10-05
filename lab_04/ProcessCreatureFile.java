@@ -1,56 +1,64 @@
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class ProcessCreatureFile {
-    public static void main(String[] args) {
-        // Step 1
-        ArrayList<Creature> creatures = new ArrayList<>();
+    
+    private ArrayList<Creature> creatures;
+    
+    private final String FILENAME = "creature-data.csv";
 
-        // Step 2
-        try (BufferedReader br = new BufferedReader(new FileReader("creature-data.csv"))) {
+    public ProcessCreatureFile() {
+        this.creatures = new ArrayList<>();
+    }
+    
+    // Gets the current list 
+    public ArrayList<Creature> getCreatures() {
+        return creatures;
+    }
+
+    
+    public void loadCreatures() throws IOException, NumberFormatException {
+        creatures.clear(); 
+        try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
             String line;
-            // Read each line in the file
             while ((line = br.readLine()) != null) {
-                // Split the line by commas (name, size, color)
                 String[] data = line.split(",");
-                // Create a new Creature object from the data and add it to the list
-                creatures.add(new Creature(data[0], Double.parseDouble(data[1]), data[2]));
+                
+                if (data.length == 3) {
+                    creatures.add(new Creature(data[0], Double.parseDouble(data[1]), data[2]));
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+    }
 
-        // Step 3
-        // Example
-        creatures.add(new Creature("Dragon", 500, "Green"));
+    
+    public void saveCreatures() throws IOException {
         
-        
-        if (creatures.size() > 2) {
-            creatures.remove(2);
-        }
-
-        
-        if (!creatures.isEmpty()) {
-            Creature firstCreature = creatures.get(0);
-            firstCreature.name = "NewName";  
-            firstCreature.size = 1.5;        
-        }
-
-        // Step 4
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/sdoha/Documents/creature-data.csv"))) {
-            
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME))) { 
             for (Creature c : creatures) {
-                bw.write(c.name + "," + c.size + "," + c.color);  
-                bw.newLine();  
+                
+                bw.write(c.getName() + "," + c.getSize() + "," + c.getColor());
+                bw.newLine();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+    }
 
-        // Step 5
-        for (Creature c : creatures) {
-            c.display();  // Display creature details using the display() method
-        }
+    
+    public void addCreature(String name, double size, String color) throws IOException {
+        Creature newCreature = new Creature(name, size, color);
+        creatures.add(newCreature);
+        saveCreatures(); 
+    }
+
+    
+    public void removeCreature(Creature c) throws IOException {
+        creatures.remove(c);
+        saveCreatures(); 
+    }
+    
+    
+    public void updateAndSave() throws IOException {
+        saveCreatures();
     }
 }
 
