@@ -38,10 +38,10 @@ public class ProcessCreatureFile {
 
         // Step 4
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/sdoha/Documents/creature-data.csv"))) {
-            // Write each creature's data back to the CSV file
+            
             for (Creature c : creatures) {
                 bw.write(c.name + "," + c.size + "," + c.color);  // Combine name, size, and color with commas
-                bw.newLine();  // Move to the next line in the file
+                bw.newLine();  
             }
         } catch (IOException e) {
             e.printStackTrace();
