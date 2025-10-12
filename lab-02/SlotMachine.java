@@ -145,7 +145,6 @@ class GoodCasino {
                     System.out.println("Sorry, no win this time.");
                 }
 
-                // Check for end-game conditions
                 if (customer.checkWallet() <= 0) {
                     System.out.println("=============================================");
                     System.out.println("Your wallet is empty. You're out of money. Game over!");
