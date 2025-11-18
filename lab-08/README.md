@@ -60,7 +60,9 @@ a. What determines the rabbit population limit?
 The fixed carrot supply per generation is the limiting factor.
 
 b. How is the carrot population maintained?
+
 It resets every generation because a new CarrotSupply object is created.
 
 c. How close is this simulation to logistic map predictions?
+
 The general behavior is similar (limits, oscillations, chaos), but not identical due to randomness and agent interactions.
