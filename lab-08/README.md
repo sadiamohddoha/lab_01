@@ -7,6 +7,7 @@
 b. When and how often does the circle redraw?
 
  Every time the slider is moved, the panel is repainted, so the circle redraws immediately on each change.
+ 
 2. Random Programs
 
  a. Where does the random data come from?
