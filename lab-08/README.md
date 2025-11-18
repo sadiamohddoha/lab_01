@@ -1,4 +1,5 @@
 1. CircleSizeSlider
+   
  a. Which function changes the circle size?
 
  The circle’s size changes when the slider is moved. The slider has a listener that detects changes, and it updates the circle’s diameter in the panel. This happens inside the stateChanged method, which reads the slider value and tells the panel the new diameter.
@@ -27,7 +28,7 @@ c. Growth rates that lead to oscillations or chaos:
  Values above 3 first produce repeating cycles, and as r increases, the behavior becomes chaotic. Chaos starts around 3.56995, though there are still some repeating patterns inside the chaotic range.
  
 6. Visualizing Programs and GUI
-7. 
+   
 Programs like CSVtoPNG and GraphFromCSV take CSV data from the generators and turn it into graphs or animations. Adjusting things like axis margins, color, or how often points are plotted can make the results easier to read.
 The BifurcationDiagram shows the long-term population for each growth rate r. It’s helpful to see when populations split into multiple stable values as r changes.
 8. RabbitAgentSimulationEmergent
