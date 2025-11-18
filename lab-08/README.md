@@ -56,6 +56,7 @@ high r becomes chaotic
 6. RabbitAgentSimulationEmergent
 
 a. What determines the rabbit population limit?
+
 The fixed carrot supply per generation is the limiting factor.
 
 b. How is the carrot population maintained?
