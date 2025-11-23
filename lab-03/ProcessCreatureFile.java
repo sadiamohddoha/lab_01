@@ -2,55 +2,44 @@ import java.io.*;
 import java.util.*;
 
 public class ProcessCreatureFile {
+
     public static void main(String[] args) {
-        // Step 1
         ArrayList<Creature> creatures = new ArrayList<>();
 
-        // Step 2
         try (BufferedReader br = new BufferedReader(new FileReader("creature-data.csv"))) {
             String line;
-            
+            boolean skipHeader = true;
+
             while ((line = br.readLine()) != null) {
-                
-                String[] data = line.split(",");
-                
-                creatures.add(new Creature(data[0], Double.parseDouble(data[1]), data[2]));
+                if (skipHeader) {
+                    skipHeader = false;
+                    continue;
+                }
+
+                String[] parts = line.split(",");
+                String name = parts[0];
+                double size = Double.parseDouble(parts[1]);
+                String color = parts[2];
+
+                creatures.add(new Creature(name, size, color));
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Step 3
-        // Example
-        creatures.add(new Creature("Dragon", 500, "Green"));
         
-        
-        if (creatures.size() > 2) {
-            creatures.remove(2);
-        }
+        creatures.add(new Creature("Goblin", 30.0, "Green"));
+        creatures.remove(0);
+        creatures.get(1).color = "Purple";
 
         
-        if (!creatures.isEmpty()) {
-            Creature firstCreature = creatures.get(0);
-            firstCreature.name = "NewName";  
-            firstCreature.size = 1.5;        
-        }
-
-        // Step 4
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("creature-data.csv"))) {
-            
+        try (PrintWriter pw = new PrintWriter(new FileWriter("creature-data.csv"))) {
+            pw.println("name,size,color");
             for (Creature c : creatures) {
-                bw.write(c.name + "," + c.size + "," + c.color);  // Combine name, size, and color with commas
-                bw.newLine();  
+                pw.println(c.name + "," + c.size + "," + c.color);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        // Step 5
-        for (Creature c : creatures) {
-            c.display();  
         }
     }
 }
-
