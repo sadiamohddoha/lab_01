@@ -2,49 +2,73 @@ import java.io.*;
 import java.util.*;
 
 public class CreatureRegistry {
-    private ArrayList<Creature> creatures;
+
+    private ArrayList<Creature> creatures = new ArrayList<>();
+    private String filename;
 
     public CreatureRegistry(String filename) {
-        creatures = new ArrayList<>();
-        loadCreaturesFromFile(filename);
+        this.filename = filename;
+        loadFromFile();
     }
 
-    private void loadCreaturesFromFile(String filename) {
+    private void loadFromFile() {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
+            boolean skipHeader = true;
+
             while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                creatures.add(new Creature(data[0], Double.parseDouble(data[1])));
+                if (skipHeader) {
+                    skipHeader = false;
+                    continue;
+                }
+
+                String[] parts = line.split(",");
+                String name = parts[0];
+                double size = Double.parseDouble(parts[1]);
+                String color = parts[2];
+
+                creatures.add(new Creature(name, size, color));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Error loading file");
         }
     }
 
-    public void addCreature(Creature creature) {
-        creatures.add(creature);
+    public int getCount() {
+        return creatures.size();
     }
 
-    public void removeCreature(int index) {
+    public Creature getCreatureCopy(int index) {
+        Creature c = creatures.get(index);
+        return new Creature(c.name, c.size, c.color);
+    }
+
+    public void updateCreature(int index, Creature newC) {
+        creatures.set(index, newC);
+    }
+
+    public void deleteCreature(int index) {
         creatures.remove(index);
     }
 
-    public Creature getCreature(int index) {
-        return creatures.get(index);
+    public void addCreature(Creature c) {
+        creatures.add(c);
     }
 
-    public void saveToFile(String filename) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+    public void save() {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+            pw.println("name,size,color");
             for (Creature c : creatures) {
-                bw.write(c.name + "," + c.size);
-                bw.newLine();
+                pw.println(c.name + "," + c.size + "," + c.color);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Could not save");
         }
     }
 
-    public int getCreatureCount() {
-        return creatures.size();
+    public static void main(String[] args) {
+        CreatureRegistry reg = new CreatureRegistry("creature-data.csv");
+        System.out.println("Total creatures: " + reg.getCount());
     }
 }
+
