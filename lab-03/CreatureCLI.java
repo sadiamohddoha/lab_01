@@ -1,47 +1,74 @@
 public class CreatureCLI {
+
     public static void main(String[] args) {
-        if (args.length < 2) {
-            System.out.println("Usage: java CreatureCLI <command> <args>");
+
+        if (args.length == 0) {
+            printHelp();
             System.exit(1);
         }
 
         String command = args[0];
-        CreatureRegistry registry = new CreatureRegistry("creature-data.csv");
+        CreatureRegistry reg = new CreatureRegistry("creature-data.csv");
 
         try {
+
             switch (command) {
-                case "create":
-                    String[] createData = args[1].split(" ");
-                    String name = createData[0].split(":")[1];
-                    double weight = Double.parseDouble(createData[1].split(":")[1]);
-                    registry.addCreature(new Creature(name, weight));
+
+                case "create": {
+                    Creature c = parseCreature(args[1]);
+                    reg.addCreature(c);
+                    reg.save();
                     break;
-                case "read":
-                    int readIndex = Integer.parseInt(args[1]);
-                    Creature c = registry.getCreature(readIndex);
-                    System.out.println("Creature: " + c.name + ", Weight: " + c.size);
+                }
+
+                case "read": {
+                    int index = Integer.parseInt(args[1]);
+                    Creature c = reg.getCreatureCopy(index);
+                    System.out.println(c.name + " " + c.size + " " + c.color);
                     break;
-                case "delete":
-                    int deleteIndex = Integer.parseInt(args[1]);
-                    registry.removeCreature(deleteIndex);
+                }
+
+                case "update": {
+                    int index = Integer.parseInt(args[1]);
+                    Creature newC = parseCreature(args[2]);
+                    reg.updateCreature(index, newC);
+                    reg.save();
                     break;
-                case "update":
-                    int updateIndex = Integer.parseInt(args[1]);
-                    String[] updateData = args[2].split(" ");
-                    String updatedName = updateData[0].split(":")[1];
-                    double updatedWeight = Double.parseDouble(updateData[1].split(":")[1]);
-                    Creature updatedCreature = new Creature(updatedName, updatedWeight);
-                    registry.getCreature(updateIndex).name = updatedName;  
+                }
+
+                case "delete": {
+                    int index = Integer.parseInt(args[1]);
+                    reg.deleteCreature(index);
+                    reg.save();
                     break;
+                }
+
                 default:
-                    System.out.println("Unknown command");
+                    printHelp();
                     System.exit(1);
             }
+
         } catch (Exception e) {
-            System.out.println("Error processing command: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
             System.exit(1);
         }
+    }
 
-        registry.saveToFile("creature-data.csv"); 
+    private static Creature parseCreature(String s) {
+        // format: "name:Dragon size:500 color:Green"
+        String[] parts = s.split(" ");
+        String name = parts[0].split(":")[1];
+        double size = Double.parseDouble(parts[1].split(":")[1]);
+        String color = parts[2].split(":")[1];
+
+        return new Creature(name, size, color);
+    }
+
+    private static void printHelp() {
+        System.out.println("Usage:");
+        System.out.println("java CreatureCLI create 'name:NAME size:SIZE color:COLOR'");
+        System.out.println("java CreatureCLI read INDEX");
+        System.out.println("java CreatureCLI update INDEX 'name:NAME size:SIZE color:COLOR'");
+        System.out.println("java CreatureCLI delete INDEX");
     }
 }
