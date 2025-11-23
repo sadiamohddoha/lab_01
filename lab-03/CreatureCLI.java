@@ -55,7 +55,6 @@ public class CreatureCLI {
     }
 
     private static Creature parseCreature(String s) {
-        // format: "name:Dragon size:500 color:Green"
         String[] parts = s.split(" ");
         String name = parts[0].split(":")[1];
         double size = Double.parseDouble(parts[1].split(":")[1]);
