@@ -1,14 +1,23 @@
 1. CirclePlotter.java
 
 a. The main method is located in the CirclePlotter class.
+
 b. The circles are drawn in the panel class.
+
 c. The class the circles are drawn on is a JPanel.
+
 d. The panel implements the MouseListener interface.
+
 e. The method that draws the circle is the paintComponent method.
+
 f. The size of the circle is determined by the radius value in the drawing code.
+
 g. The variable that stores circle information is a list that holds the circle objects.
+
 h. The function that actually draws the circles is paintComponent.
+
 i. The methods implemented for the interface are mouseClicked, mousePressed, mouseReleased, mouseEntered, and mouseExited.
+
 j. The mouseClicked method responds to mouse clicks and causes the circle to be drawn.
 
 2. SquarePlotter.java
