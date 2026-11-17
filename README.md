@@ -13,19 +13,19 @@ Concepts and Programming Topics
 
 Throughout Java I and Java II, I developed experience with:
 
-Java Programming: Java fundamentals, methods, classes, objects, and object-oriented programming.
+1. Java Programming: Java fundamentals, methods, classes, objects, and object-oriented programming.
 
-Data Structures and Collections: Arrays, two-dimensional arrays, ArrayLists, HashMaps, and Java collections.
+2. Data Structures and Collections: Arrays, two-dimensional arrays, ArrayLists, HashMaps, and Java collections.
 
-Data Organization and Processing: Storing, accessing, updating, removing, iterating through, and processing collections of data.
+3. Data Organization and Processing: Storing, accessing, updating, removing, iterating through, and processing collections of data.
 
-Object-Oriented Programming: Encapsulation, inheritance, polymorphism, interfaces, and interactions between objects.
+4. Object-Oriented Programming: Encapsulation, inheritance, polymorphism, interfaces, and interactions between objects.
 
-Algorithms and Problem-Solving: Implementing logical operations, processing data, simulations, and solving programming problems.
+5. Algorithms and Problem-Solving: Implementing logical operations, processing data, simulations, and solving programming problems.
 
-Iterators and Collection Operations: Iterating through collections, modifying collections, and managing objects.
+6. Iterators and Collection Operations: Iterating through collections, modifying collections, and managing objects.
 
-GUI Programming: Developing graphical applications and interactive programs.
+7. GUI Programming: Developing graphical applications and interactive programs.
 
-File Processing: Reading and writing files and working with structured data.
+8. File Processing: Reading and writing files and working with structured data.
 
